@@ -20,26 +20,12 @@ const parseInput = (lists) => {
 const [leftList, rightList] = parseInput(input);
 let totalDistance = 0;
 
-// Sort each list by quick sort
-const quickSort = (array) => {
-  if (array.length < 2) {
-    return array;
-  }
-
-  const pivot = array[array.length - 1];
-
-  const left = array.filter((el) => el < pivot);
-  const right = array.filter((el) => el > pivot);
-  const middle = array.filter((el) => el === pivot);
-
-  return [...quickSort(left), ...middle, ...quickSort(right)];
-};
-const sortedLeftList = quickSort(leftList);
-const sortedRightList = quickSort(rightList);
+leftList.sort((a, b) => a - b);
+rightList.sort((a, b) => a - b);
 
 // Iterate thru them and calc total distance
-sortedLeftList.forEach((id, index) => {
-  const distance = Math.abs(id - sortedRightList[index]);
+leftList.forEach((id, index) => {
+  const distance = Math.abs(id - rightList[index]);
   totalDistance += distance;
 });
 
